@@ -80,7 +80,6 @@ function submitValue(){
 
     const rollvalue =document.getElementById("roll-value")
     rollvalue.innerText = rollPlace
-
         const popup = document.getElementById("contact-popup")
         console.log(popup.classList)
         popup.setAttribute("class", "bg-[#00000050] fixed w-full h-full left-0 top-0")
