@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#E0E0E0]">
+    <!-- Header Section -->
+    <div class="px-[2rem] py-[2rem] flex items-center justify-center font-bold text-4xl  rounded-md text-[#003366]">
+        <h1>Student Attendance System</h1>
+    </div>
+
+    <!-- Personal Information Section -->
+    <section
+        class="max-w-5xl mx-auto mt-8 p-8 rounded-lg border-2 bg-[#CCE5FF] border-[#CCE5FF] shadow-lg shadow-[#7ab1eb]">
+        <div class="flex flex-wrap gap-6 mb-6">
+            <div>
+                <label for="firstname" class="text-xl font-semibold font-serif">First Name</label>
+                <input type="text" id="first-input" placeholder="Enter First Name"
+                    class="border-2 rounded-md mt-[1rem] px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+            <div>
+                <label for="lastname" class="text-xl font-semibold font-serif">Last Name</label>
+                <input type="text" id="last-input" placeholder="Enter Last Name"
+                    class="flex border-2 rounded-md mt-[1rem] px-[1rem] py-[0.5rem] border-black">
+            </div>
+            <div>
+                <label for="dateofbirth" class="text-xl font-semibold font-serif">DOB</label>
+                <input type="date" id="date-input"
+                    class="flex border-2 rounded-md mt-[1rem] px-[1rem] py-[0.5rem] border-black">
+            </div>
+            <div>
+                <label for="gender" class="text-xl flex pb-[1rem] font-semibold font-serif">Gender</label>
+                <input type="radio" id="male-input" name="gender" value="Male">
+                <label class="pl-[0.5rem] pr-[0.5rem] text-base font-semibold font-serif" for="male-input">Male</label>
+                <input type="radio" id="female-input" name="gender" value="Female">
+                <label class="pl-[0.5rem] text-base font-semibold font-serif" for="female-input">Female</label>
+            </div>
+        </div>
+
+        <!-- Parent Information Form -->
+        <div class="flex flex-1 gap-6 mb-6">
+            <div>
+                <label for="FatherName" class="text-xl font-semibold font-serif">Father Name</label>
+                <input type="text" id="father-input" placeholder="Enter Father Name"
+                    class="border-2 rounded-md px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+            <div>
+                <label for="MotherName" class="text-xl font-semibold font-serif">Mother Name</label>
+                <input type="text" id="mother-input" placeholder="Enter Mother Name"
+                    class="border-2 rounded-md px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+            <div>
+                <label for="Contact" class="text-xl font-semibold font-serif">Contact</label>
+                <input type="tel" id="contact-input" placeholder="Enter Contact No"
+                    class="border-2 rounded-md px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+            <div>
+                <label for="Address" class="text-xl font-semibold font-serif">Address</label>
+                <input type="text" id="address-input" placeholder="Enter Current Address"
+                    class="border-2 rounded-md px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+        </div>
+
+        <!-- Class and Roll Number Section -->
+        <div class="flex flex-1 gap-6">
+            <div>
+                <label for="Class" class="text-xl font-semibold font-serif">Class</label>
+                <input type="text" id="class-input" placeholder="Enter Class"
+                    class="border-2 rounded-md px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+            <div>
+                <label for="RollNo" class="text-xl font-semibold font-serif">Roll No</label>
+                <input type="number" id="roll-input" placeholder="Enter Roll No"
+                    class="border-2 rounded-md px-[1rem] py-[0.5rem] flex border-black">
+            </div>
+        </div>
+        <!-- Submit Button -->
+        <div class="flex justify-center mt-8">
+            <button onclick="submitValue()"
+                class="px-6 py-3 bg-indigo-500 text-white font-bold text-lg uppercase rounded-full transform hover:-translate-y-1 duration-300 shadow-md">
+                Submit
+            </button>
+        </div>
+    </section>
+
+    <!-- Display Table -->
+    <section id="table-section" class="max-w-5xl mx-auto mt-8 hidden">
+        <table class="table-auto w-full border-collapse border border-gray-400">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-400 px-4 py-2">First Name</th>
+                    <th class="border border-gray-400 px-4 py-2">Last Name</th>
+                    <th class="border border-gray-400 px-4 py-2">DOB</th>
+                    <th class="border border-gray-400 px-4 py-2">Gender</th>
+                    <th class="border border-gray-400 px-4 py-2">Father Name</th>
+                    <th class="border border-gray-400 px-4 py-2">Mother Name</th>
+                    <th class="border border-gray-400 px-4 py-2">Contact</th>
+                    <th class="border border-gray-400 px-4 py-2">Address</th>
+                    <th class="border border-gray-400 px-4 py-2">Class</th>
+                    <th class="border border-gray-400 px-4 py-2">Roll No</th>
+                </tr>
+            </thead>
+            <tbody id="data-table">
+                <!-- Data rows will be appended here dynamically -->
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        function submitValue() {
+            const firstName = document.getElementById('first-input').value;
+            const lastName = document.getElementById('last-input').value;
+            const dob = document.getElementById('date-input').value;
+            const gender = document.getElementById('male-input').checked ? 'Male' : document.getElementById('female-input').checked ? 'Female' : '';
+            const fatherName = document.getElementById('father-input').value;
+            const motherName = document.getElementById('mother-input').value;
+            const contact = document.getElementById('contact-input').value;
+            const address = document.getElementById('address-input').value;
+            const className = document.getElementById('class-input').value;
+            const rollNo = document.getElementById('roll-input').value;
+
+            if (!firstName || !lastName || !dob || !gender || !fatherName || !motherName || !contact || !address || !className || !rollNo) {
+                alert('Please fill out all fields.');
+                return;
+            }
+            // Create an object with form data
+            const studentData = {
+                firstName,
+                lastName,
+                dob,
+                gender,
+                fatherName,
+                motherName,
+                contact,
+                address,
+                className,
+                rollNo
+            };
+
+            // Retrieve existing data from localStorage
+            let students = JSON.parse(localStorage.getItem('students')) || [];
+
+            // Add new data to the array
+            students.push(studentData);
+
+            // Save updated data back to localStorage
+            localStorage.setItem('students', JSON.stringify(students));
+           
+
+            const tableSection = document.getElementById('table-section');
+            tableSection.classList.remove('hidden');
+
+            const table = document.getElementById('data-table');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td class="border border-gray-400 px-4 py-2">${firstName}</td>
+                <td class="border border-gray-400 px-4 py-2">${lastName}</td>
+                <td class="border border-gray-400 px-4 py-2">${dob}</td>
+                <td class="border border-gray-400 px-4 py-2">${gender}</td>
+                <td class="border border-gray-400 px-4 py-2">${fatherName}</td>
+                <td class="border border-gray-400 px-4 py-2">${motherName}</td>
+                <td class="border border-gray-400 px-4 py-2">${contact}</td>
+                <td class="border border-gray-400 px-4 py-2">${address}</td>
+                <td class="border border-gray-400 px-4 py-2">${className}</td>
+                <td class="border border-gray-400 px-4 py-2">${rollNo}</td>
+            `;
+
+            table.appendChild(row);
+
+            // Clear form inputs
+            document.querySelectorAll('input').forEach(input => input.value = '');
+            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+            
+        }
+    </script>
+</body>
+
+</html>
+<!-- variable const let var -->
