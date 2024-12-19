@@ -87,6 +87,13 @@
             </button>
         </div>
     </section>
+    <div style="margin-top: 20px; display: flex; align-items: center">
+        <input type="text" id="search" placeholder="Search..." />
+        <button onclick="searchData()">Search</button>
+    </div>
+
+    <div id="result"></div>
+    <div id="searchresult"></div>
 
     <!-- Display Table -->
     <section id="table-section" class="max-w-5xl mx-auto mt-8 hidden">
@@ -110,76 +117,11 @@
             </tbody>
         </table>
     </section>
+   
 
-    <script>
-        function submitValue() {
-            const firstName = document.getElementById('first-input').value;
-            const lastName = document.getElementById('last-input').value;
-            const dob = document.getElementById('date-input').value;
-            const gender = document.getElementById('male-input').checked ? 'Male' : document.getElementById('female-input').checked ? 'Female' : '';
-            const fatherName = document.getElementById('father-input').value;
-            const motherName = document.getElementById('mother-input').value;
-            const contact = document.getElementById('contact-input').value;
-            const address = document.getElementById('address-input').value;
-            const className = document.getElementById('class-input').value;
-            const rollNo = document.getElementById('roll-input').value;
+    <script src="./index.js"></script>
+    
 
-            if (!firstName || !lastName || !dob || !gender || !fatherName || !motherName || !contact || !address || !className || !rollNo) {
-                alert('Please fill out all fields.');
-                return;
-            }
-            // Create an object with form data
-            const studentData = {
-                firstName,
-                lastName,
-                dob,
-                gender,
-                fatherName,
-                motherName,
-                contact,
-                address,
-                className,
-                rollNo
-            };
-
-            // Retrieve existing data from localStorage
-            let students = JSON.parse(localStorage.getItem('students')) || [];
-
-            // Add new data to the array
-            students.push(studentData);
-
-            // Save updated data back to localStorage
-            localStorage.setItem('students', JSON.stringify(students));
-           
-
-            const tableSection = document.getElementById('table-section');
-            tableSection.classList.remove('hidden');
-
-            const table = document.getElementById('data-table');
-            const row = document.createElement('tr');
-
-            row.innerHTML = `
-                <td class="border border-gray-400 px-4 py-2">${firstName}</td>
-                <td class="border border-gray-400 px-4 py-2">${lastName}</td>
-                <td class="border border-gray-400 px-4 py-2">${dob}</td>
-                <td class="border border-gray-400 px-4 py-2">${gender}</td>
-                <td class="border border-gray-400 px-4 py-2">${fatherName}</td>
-                <td class="border border-gray-400 px-4 py-2">${motherName}</td>
-                <td class="border border-gray-400 px-4 py-2">${contact}</td>
-                <td class="border border-gray-400 px-4 py-2">${address}</td>
-                <td class="border border-gray-400 px-4 py-2">${className}</td>
-                <td class="border border-gray-400 px-4 py-2">${rollNo}</td>
-            `;
-
-            table.appendChild(row);
-
-            // Clear form inputs
-            document.querySelectorAll('input').forEach(input => input.value = '');
-            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-            
-        }
-    </script>
 </body>
 
 </html>
-<!-- variable const let var -->
